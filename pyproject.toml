@@ -1,0 +1,27 @@
+[project]
+name = "context-layer"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic>=2.13.4",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.0",
+    "pytest>=9.1.1",
+    "ruff>=0.16.1",
+]
+
+[tool.mypy]
+strict = true
+files = ["."]
+
+# The three modules sit at the repo root and the project is not installed into the
+# venv, so pytest has to be told the root is importable.
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+# Import order is mechanical and auto-fixable; settling it here keeps it out of review.
+[tool.ruff.lint]
+extend-select = ["I"]
