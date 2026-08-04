@@ -33,6 +33,7 @@ Status: pre-MVP. The goal is a deployed, demoable system we develop together wit
 - Async at I/O boundaries: connectors and the MCP server are `async`.
 - Everything else is plain sync — extraction, transformation, business logic.
   If a function does not await anything, it is not async. Do not mix without discussing.
+- `knowledge` is sync, store write included. `server` bridges it with `asyncio.to_thread`.
 - Pydantic models for anything crossing a module boundary. Dicts stay internal.
 - Custom exception types per module.
 - IMPORTANT: never swallow an exception. No bare `except:`, no `except ...: pass`, no
