@@ -18,10 +18,8 @@ Status: pre-MVP. The goal is a deployed, demoable system we develop together wit
 
 ## Module structure
 
-- Three top-level modules, mirroring the pipeline:
-  - `connectors/` — platform connectors, raw pull, landing raw data
-  - `knowledge/` — extraction into facts and processes, and the store
-  - `server/` — the MCP server (read and write)
+- Three top-level modules, mirroring the pipeline: `connectors/`, `knowledge/`, `server/`.
+  What each one owns is stated in its `__init__.py`.
 - Imports flow in one direction only: `server` → `knowledge` → `connectors`. Never backwards.
 - Cross-module imports go through the module's `__init__.py` only. Never reach into internals.
 - This applies recursively. Submodules follow the same rule: few, large, one-directional,
@@ -59,9 +57,6 @@ Status: pre-MVP. The goal is a deployed, demoable system we develop together wit
   `uv run pytest`, `uv run mypy .`, `uv run ruff check .`
 - Test-driven by default: write the failing test first, then the code that passes it.
 - Write code to be testable — dependencies passed in, not constructed inside.
-- Exception: for the connectors in `connectors/`, explore the real API first to learn the actual
-  response shape, then write tests that lock that shape before opening the PR. Do not invent
-  an expected API response and test against it.
 - This file is shared between both of us. If you learn something that belongs here, propose
   the edit rather than applying it silently — auto memory is machine-local and does not reach
   the other person.
@@ -77,14 +72,10 @@ Status: pre-MVP. The goal is a deployed, demoable system we develop together wit
 
 ## Open decisions — STOP and ask
 
-IMPORTANT: the following are deliberately undecided. If a task requires one of them, stop and
-ask. Do not pick a default silently.
-
-- Shape of raw storage: whether `connectors/` persists raw pulls or passes through.
-  Leaning toward persisting. Not settled.
-- Format of stored facts and processes.
-- Fact store beyond the current cloud vector database.
-- Model provider. OpenRouter is temporary.
+IMPORTANT: some things are deliberately undecided. Each one lives in the docstring of the
+module it belongs to — `connectors/` (whether raw pulls are persisted), `knowledge/` (fact and
+process format, the fact store, the model provider). Read a module's `__init__.py` before
+working in it. If a task requires one of them, stop and ask. Do not pick a default silently.
 
 Keep persistence and model calls behind a thin interface so these stay swappable.
 
