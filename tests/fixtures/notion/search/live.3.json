@@ -1,0 +1,282 @@
+{
+  "object": "list",
+  "results": [
+    {
+      "object": "page",
+      "id": "3b31b933-7ce1-8022-a980-c809dc38e066",
+      "created_time": "2026-08-05T18:12:00.000Z",
+      "last_edited_time": "2026-08-05T18:23:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "bb18ce08-abfa-43e5-8679-67cce95af292"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "workspace",
+        "workspace": true
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "title": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Northwind Robotics",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Northwind Robotics",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/Northwind-Robotics-3b31b9337ce18022a980c809dc38e066",
+      "public_url": null
+    },
+    {
+      "object": "data_source",
+      "id": "8cc0d8ee-8a09-4795-8405-e910c0c61500",
+      "cover": null,
+      "icon": null,
+      "created_time": "2026-08-05T18:20:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "last_edited_time": "2026-08-05T18:22:00.000Z",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Teams",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Teams",
+          "href": null
+        }
+      ],
+      "description": [],
+      "is_inline": false,
+      "properties": {
+        "Region": {
+          "id": "IW%7Bg",
+          "name": "Region",
+          "description": null,
+          "type": "select",
+          "select": {
+            "options": [
+              {
+                "id": "014f85e6-4e0f-4328-96f2-3484c119eeb6",
+                "name": "AMER",
+                "color": "blue",
+                "description": null
+              },
+              {
+                "id": "95be8e77-ee22-4a63-ab6f-614ca99afac4",
+                "name": "EMEA",
+                "color": "green",
+                "description": null
+              },
+              {
+                "id": "df5e26be-586e-4580-9717-4c99f373b7b7",
+                "name": "APAC",
+                "color": "orange",
+                "description": null
+              }
+            ]
+          }
+        },
+        "Description": {
+          "id": "I%7Dla",
+          "name": "Description",
+          "description": null,
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Headcount": {
+          "id": "Qa%40l",
+          "name": "Headcount",
+          "description": null,
+          "type": "number",
+          "number": {
+            "format": "number"
+          }
+        },
+        "Lead": {
+          "id": "WV%7BH",
+          "name": "Lead",
+          "description": null,
+          "type": "people",
+          "people": {}
+        },
+        "Related to Projects (TeamTwoWay)": {
+          "id": "pO%60%60",
+          "name": "Related to Projects (TeamTwoWay)",
+          "description": null,
+          "type": "relation",
+          "relation": {
+            "database_id": "1b700695-fad0-41fc-986d-21481476a0a5",
+            "data_source_id": "98dfbe8b-4001-4467-a873-23713f923d3e",
+            "type": "dual_property",
+            "dual_property": {
+              "synced_property_name": "TeamTwoWay",
+              "synced_property_id": "BfnB"
+            }
+          }
+        },
+        "Name": {
+          "id": "title",
+          "name": "Name",
+          "description": null,
+          "type": "title",
+          "title": {}
+        }
+      },
+      "parent": {
+        "type": "database_id",
+        "database_id": "c9bab47e-6e6c-42d1-830c-ea2aedf45674"
+      },
+      "database_parent": {
+        "type": "page_id",
+        "page_id": "3b31b933-7ce1-81c9-8367-d52b24fca739"
+      },
+      "url": "https://app.notion.com/p/c9bab47e6e6c42d1830cea2aedf45674",
+      "public_url": null,
+      "in_trash": false
+    },
+    {
+      "object": "page",
+      "id": "3b31b933-7ce1-8138-a2e9-dbd9a45063a0",
+      "created_time": "2026-08-05T18:22:00.000Z",
+      "last_edited_time": "2026-08-05T18:22:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "page_id",
+        "page_id": "3b31b933-7ce1-81dd-a291-febf3818a283"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "title": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "160 Paragraphs",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "160 Paragraphs",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/160-Paragraphs-3b31b9337ce18138a2e9dbd9a45063a0",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "3b31b933-7ce1-81f8-9fcc-e86c358b94eb",
+      "created_time": "2026-08-05T18:20:00.000Z",
+      "last_edited_time": "2026-08-05T18:21:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3b31b933-7ce1-81e2-9602-0027b09b931b"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "page_id",
+        "page_id": "3b31b933-7ce1-81dc-bc9f-d6a410063224"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "title": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "2. Deep Block Hierarchy (nested toggles)",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "2. Deep Block Hierarchy (nested toggles)",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/2-Deep-Block-Hierarchy-nested-toggles-3b31b9337ce181f89fcce86c358b94eb",
+      "public_url": null
+    }
+  ],
+  "next_cursor": null,
+  "has_more": false,
+  "type": "page_or_data_source",
+  "page_or_data_source": {}
+}

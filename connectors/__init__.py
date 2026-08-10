@@ -10,15 +10,21 @@ endpoint first to learn the shape it actually returns, then write the tests that
 that shape, before opening the PR. A test built on a guessed response passes against
 the guess and tells you nothing.
 
-Undecided: whether this module persists raw pulls or passes them straight to
-caller and who caller is exatly.
+Settled: this module persists nothing. A connector pulls, hands its envelopes back
+and keeps no copy, and the caller is `main.py`, which passes them to `knowledge`. A
+raw-pull store would be a second copy of the platform's own data, stale the moment
+it is written and answering no question the platform cannot answer better itself;
+the copy worth keeping is the one `knowledge` makes. Re-pulling is cheap and always
+current, so a pull is a pass-through. What this costs us is that a pull we did not
+keep cannot be replayed -- a change to extraction means going back to the platform
+rather than to a cached response. That is the trade we are taking.
 """
 
 from typing import Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
-__all__ = ["Envelope"]
+__all__ = ["Envelope", "NotionError", "notion_client", "pull_notion"]
 
 
 class Envelope(BaseModel):
@@ -30,13 +36,35 @@ class Envelope(BaseModel):
     title, its parent, when it last changed, or whether it is gone.
 
     Outside `data` are the fields that mean the same thing on every platform.
-    Inside `data` is the vendor payload exactly as the platform returned it,
-    untouched. `data` is the only vendor-shaped field, and everything
-    platform-specific belongs in it: a Notion property map, a Slack thread_ts, a
-    Gmail label list.
+    Inside `data` is the vendor payload as the platform returned it. `data` is
+    the only vendor-shaped field, and everything platform-specific belongs in
+    it: a Notion property map, a Slack thread_ts, a Gmail label list.
+
+    A connector may add to `data` where one call does not return a whole record.
+    Notion's search hands over a page's properties but not its body, so the
+    Notion connector walks the block tree and puts it under `blocks`. What a
+    connector may not do is edit or drop what the platform sent. Any key it adds
+    has to be named in its own docstring, and it has to fail rather than
+    overwrite if the platform starts sending that key itself -- otherwise
+    nothing reading `data` can tell the vendor's value from the connector's.
 
     Nothing reads `data` yet. It is carried so that extraction can reach a detail
     we did not anticipate without going back to the platform for another pull.
+
+    `text` is the same content with the vendor structure taken off: the words a
+    person would read, and nothing else. It is what `knowledge` embeds, and the
+    reason it exists is that `data` cannot be embedded. Notion wraps three
+    paragraphs in around 3,000 characters of ids, timestamps and JSON, and an
+    embedding model reads a few hundred words before it stops -- so a record
+    embedded from `data` is embedded from its metadata, and every page comes out
+    looking like every other page. Pulling the prose out is work only a connector
+    can do, since only it knows where its platform keeps the words.
+
+    It has no default, for the same reason `is_deleted` has none: a connector that
+    forgets it produces a record that stores fine, reads back fine, and can never
+    be found. `None` is for a record that genuinely has no prose -- a Notion data
+    source is a schema, not a document -- not for one whose connector did not
+    look.
 
     `(source, source_id)` is the upsert key, exposed as `upsert_key`. Two
     envelopes with the same pair are the same record, so re-pulling updates the
@@ -75,6 +103,7 @@ class Envelope(BaseModel):
     source_id: str = Field(min_length=1)
     url: str
     title: str | None
+    text: str | None
     # Carries an id and nothing else: it does not say whether the parent is a
     # page, a database or the workspace root, which in Notion are three
     # different things. Unresolved until we have explored the real API and know
@@ -93,3 +122,9 @@ class Envelope(BaseModel):
         # would collide here. The long-term key is probably
         # (source, account_id, source_id), once a second account is real.
         return self.source, self.source_id
+
+
+# Last, not at the top: a connector imports `Envelope` from here, so this line has
+# to run after the class above exists. Every connector's public interface is
+# re-exported here, because nothing outside this module may reach into a submodule.
+from connectors.notion import NotionError, notion_client, pull_notion
