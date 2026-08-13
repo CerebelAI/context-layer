@@ -784,7 +784,7 @@ def test_a_record_that_is_never_walked_has_no_text(source_id: str) -> None:
 
 def test_text_does_not_disturb_the_payload_it_was_read_from() -> None:
     # `text` is a second view of the body, not a replacement for it: `data` still
-    # has to survive verbatim so extraction can go back for a detail `text` drops.
+    # has to survive verbatim, so a reader can go back for a detail `text` drops.
     envelopes = by_id(pull(Notion()))
     envelope = envelopes[PARAGRAPHS_PAGE]
 

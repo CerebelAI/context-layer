@@ -19,7 +19,7 @@ from qdrant_client.models import (
 from connectors import Envelope
 
 # Qdrant runs this one locally through fastembed, so retrieval needs no model
-# provider and stays clear of the undecided one.
+# provider.
 _EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 _EMBEDDING_SIZE = 384
 
@@ -27,7 +27,7 @@ _EMBEDDING_SIZE = 384
 # fail, and nothing downstream can tell a fully embedded record from a truncated
 # one. Named here because it is the constraint the whole design of `_embed_text`
 # answers to, and because it is what makes a long record findable only by its
-# opening. Splitting a record across several points is the fix, and is not done.
+# opening. One point per record stands regardless (ADR-0006).
 _EMBEDDING_WINDOW = 512
 
 SCORE_THRESHOLD = 0.5

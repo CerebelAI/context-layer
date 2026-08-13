@@ -203,7 +203,7 @@ async def test_get_returns_null_when_the_tenant_has_no_such_record() -> None:
     result = await call(
         server(FakeStore(get_result=None)),
         "get_record",
-        {"source": "slack", "source_id": "missing", "tenant_id": TENANT},
+        {"source": "notion", "source_id": "missing", "tenant_id": TENANT},
     )
 
     assert result == {"result": None}
@@ -213,12 +213,13 @@ async def test_get_returns_null_when_the_tenant_has_no_such_record() -> None:
 async def test_get_refuses_a_source_that_is_not_a_connected_platform() -> None:
     store = FakeStore()
 
-    with pytest.raises(ToolError):
-        await call(
-            server(store),
-            "get_record",
-            {"source": "dropbox", "source_id": "abc123", "tenant_id": TENANT},
-        )
+    for source in ("dropbox", "slack"):
+        with pytest.raises(ToolError):
+            await call(
+                server(store),
+                "get_record",
+                {"source": source, "source_id": "abc123", "tenant_id": TENANT},
+            )
 
     assert store.get_calls == []
 

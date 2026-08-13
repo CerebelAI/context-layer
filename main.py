@@ -1,15 +1,13 @@
 """Composition root for the context layer.
 
-The intended end-to-end flow, once the three modules have something in them:
+The end-to-end flow:
 
-    a trigger fires -- for now a person running this file, later a schedule or a
-    request arriving at the MCP server
+    a person runs this file
 
-        connectors     connects to Notion / Slack / Gmail and pulls raw records,
-                       returning each one as an `Envelope`
+        connectors     connects to Notion and pulls raw records, returning each
+                       one as an `Envelope`
 
-        knowledge      ingests those envelopes, extracts facts and processes out
-                       of them, and puts the result in the store
+        knowledge      ingests those envelopes and puts them in the store
 
         server         exposes that store over MCP, for read and for write
 
@@ -31,17 +29,10 @@ Being the only place that knows all three, this file constructs the concrete pie
 -- connectors, store, server -- and hands them to each other, so nothing below has
 to reach sideways or upwards to find its dependencies.
 
-Two verbs, because the flow has two ends and they run on different clocks:
+Two verbs:
 
     uv run main.py pull     one pass over Notion into the store, then exits
     uv run main.py serve    the MCP server, until stopped
-
-Keeping them apart is what lets a pull be scheduled without restarting the server,
-and lets the server start when Notion is down. Both build the same store, which is
-the only thing they share.
-
-`knowledge` still does no extraction, so `pull` puts envelopes in the store whole.
-The stage is real; what happens inside it is not built yet.
 """
 
 import argparse

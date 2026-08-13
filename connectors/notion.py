@@ -98,11 +98,14 @@ async def pull_notion(
 
     TODO: that last part is wrong for a real workspace, not merely incomplete. A
     row is a page, so it can carry a body of blocks underneath its properties,
-    and skipping the walk drops every word of it. Every row in the seeded
-    workspace has an empty body, so nothing is lost today and no fixture can
-    show the case -- but we do expect customers to write prose into rows. Fixing
-    it means one request per row: roughly 180 against this workspace, where the
-    whole pull is currently about 90. Capture a row with a body first.
+    and skipping the walk drops every word of it. This is no longer hypothetical:
+    "Prose Body In Row Check" in Projects carries eight blocks nested three deep
+    and comes back with `text=None` and no `blocks` key, so words are being lost
+    today. It was written into the workspace to be captured, because the other
+    174 rows are empty and no fixture could otherwise show the case. Its
+    `Summary` property is filled too, so a test can tell what search returns from
+    what only a walk would. Fixing it means one request per row: 175 against this
+    workspace, where the whole pull is currently about 90. See #5.
 
     Deleted records are invisible to an ordinary search, so a second pass runs with
     Notion's trash filter and the records it returns come back `is_deleted=True`.

@@ -32,7 +32,8 @@ from knowledge import Match, Store
 
 __all__ = ["build_server"]
 
-Source = Literal["notion", "slack", "gmail"]
+# Mirrors `Envelope.source`, which is closed on purpose (ADR-0009).
+Source = Literal["notion"]
 
 
 def build_server(store: Store) -> MCPServer:
@@ -45,7 +46,7 @@ def build_server(store: Store) -> MCPServer:
 
         This is the write side. Each record is an envelope: one thing pulled from a
         platform, in the shape everything here consumes. Every envelope needs
-        `source` (notion, slack or gmail), `source_id` (that platform's own stable
+        `source` (notion), `source_id` (that platform's own stable
         id for the record -- never a title, a URL or a position in a list), `url`,
         `created_at` and `last_modified` (both with a timezone offset), and
         `is_deleted`. `title` and `parent_id` may be null. Put the platform's own
