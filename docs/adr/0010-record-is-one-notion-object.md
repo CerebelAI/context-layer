@@ -74,9 +74,11 @@ while `/search` returns *data sources*, and the two have been different ids sinc
 Typing the field would not fix that — knowing an id names a database still does not name
 anything we hold — and for the 230 that resolve, the id alone is unambiguous, because you
 hold the thing it names and can ask it what it is. So the field stays as it is and the
-promise it makes gets written down instead. Making the chain resolve — hopping database →
-containing page, seven extra requests — is filed as build work, and is what would promote
-this from a relay to a real pointer.
+promise it makes gets written down instead. Making the chain resolve is filed as build work,
+and is what would promote this from a relay to a real pointer. It costs no requests. A data
+source object also carries `database_parent` — the containing page, precomputed by Notion to
+save the database round-trip — and `/search` already returns it on every one, measured on all
+nine in the workspace (#26). The hop is a field we do not read, not a request budget.
 
 Issue #8 asked whether to keep it untyped, type it, or drop it; this is the answer for as
 long as Notion is the only source. What a parent *means* across platforms stays undecidable
