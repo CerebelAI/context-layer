@@ -57,6 +57,12 @@ read, and nothing else. Producing it is work only a connector can do, because on
 where its platform keeps the words.
 _Avoid_: body, content, plaintext
 
+**Path**:
+The chain of titles above a record, down to its parent — `Context Layer / Decisions /
+<ADR title>`. Resolved when it is needed and never stored. A reader is shown the whole
+chain; only the last segment reaches what is embedded (ADR-0011).
+_Avoid_: breadcrumb, crumb, trail, hierarchy, ancestry, document
+
 ## Beyond the connectors
 
 **Tenant**:
@@ -67,3 +73,9 @@ _Avoid_: organization, company, customer (in code), account, workspace
 **Store**:
 Where envelopes live once ingested, and the only thing that persists anything.
 _Avoid_: database, index, vector store, cache
+
+**Embedded Text**:
+What `knowledge` hands the embedder for one record: the last segment of its path, its title,
+and its `text`. Never stored and never shown — a record is findable by its embedded text and
+legible by its `text`.
+_Avoid_: search text, index text, vector text, chunk

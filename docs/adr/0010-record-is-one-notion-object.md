@@ -75,8 +75,10 @@ Typing the field would not fix that — knowing an id names a database still doe
 anything we hold — and for the 230 that resolve, the id alone is unambiguous, because you
 hold the thing it names and can ask it what it is. So the field stays as it is and the
 promise it makes gets written down instead. Making the chain resolve — hopping database →
-containing page, seven extra requests — is filed as build work, and is what would promote
-this from a relay to a real pointer.
+containing page — is filed as build work (#19), and is what would promote this from a relay
+to a real pointer. It costs no requests at all: every data source already carries
+`database_parent`, naming its containing page, in the `/search` response the connector
+makes (#26). The "seven extra requests" this ADR first claimed was wrong.
 
 Issue #8 asked whether to keep it untyped, type it, or drop it; this is the answer for as
 long as Notion is the only source. What a parent *means* across platforms stays undecidable

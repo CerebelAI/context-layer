@@ -18,3 +18,4 @@ If your work contradicts an ADR, say so and amend it as part of the change.
 | [0008](0008-adapters-declare-their-sync-guarantees.md) | Adapters declare their sync guarantees *(proposed — nothing built)* |
 | [0009](0009-slack-second-gmail-last.md) | Slack is the second connector; Gmail is last |
 | [0010](0010-record-is-one-notion-object.md) | A record is one Notion object *(provisional — expires on a divergent source)* |
+| [0011](0011-a-record-embeds-its-parent.md) | What a record embeds depends on its parent |
